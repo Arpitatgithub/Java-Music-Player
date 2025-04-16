@@ -55,6 +55,7 @@
     <bottom>
         <VBox styleClass="player-controls">
             <HBox alignment="CENTER" spacing="20">
+            <Button text="Reload UI" onAction="#reloadUI"/>
                 <Button text="⏮" styleClass="control-button" onAction="#previousTrack"/>
                 <Button text="▶" styleClass="play-button" onAction="#play"/>
                 <Button text="⏸" onAction="#pause"/>

@@ -16,7 +16,7 @@
             <padding><Insets top="20" right="10" bottom="20" left="10"/></padding>
             
             <!-- Navigation -->
-            <Button text="Home" styleClass="nav-button"/>
+            <Button text="Home" styleClass="nav-button" onAction="#showAllSongs"/>
             <Button text="Search" styleClass="nav-button"/>
             <Button text="Your Library" styleClass="nav-button"/>
             
@@ -55,6 +55,7 @@
     <bottom>
         <VBox styleClass="player-controls">
             <HBox alignment="CENTER" spacing="20">
+            <Button text="Reload UI" onAction="#reloadUI"/>
                 <Button text="⏮" styleClass="control-button" onAction="#previousTrack"/>
                 <Button text="▶" styleClass="play-button" onAction="#play"/>
                 <Button text="⏸" onAction="#pause"/>

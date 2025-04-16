@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import com.example.models.Song;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -16,7 +19,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class PlayerController {
     @FXML private Label songLabel;
@@ -35,6 +43,17 @@ public class PlayerController {
     private int currentSongIndex = 0;
     private MediaPlayer mediaPlayer;
     private boolean isSeeking = false;
+
+    @FXML
+private void reloadUI() {
+    try {
+        Stage stage = (Stage) songLabel.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/views/player.fxml"));
+        stage.setScene(new Scene(root, stage.getScene().getWidth(), stage.getScene().getHeight()));
+    } catch (Exception e) {
+        System.out.println("Failed to reload FXML: " + e.getMessage());
+    }
+}
 
     @FXML
     public void initialize() {
