@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.controllers.PlaylistController">
+    <Label text="Playlist"/>
+    <!-- Search bar -->
+    <HBox spacing="10">
+        <TextField fx:id="searchField" promptText="Search songs..."/>
+        <Button text="Search" onAction="#searchSongs"/>
+        <Button text="Show Liked" onAction="#showLikedSongs"/>
+    </HBox>
+    <ListView fx:id="playlistView" prefHeight="200" prefWidth="300"/>
+    <HBox spacing="10">
+        <TextField fx:id="songTitleField" promptText="Song Title"/>
+        <Button text="Add Song" onAction="#addSong"/>
+        <Button text="Remove Song" onAction="#removeSong"/>
+    </HBox>
+    <Button text="Go to Player" onAction="#goToPlayer"/>
+</VBox>

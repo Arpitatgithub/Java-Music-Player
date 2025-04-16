@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+javafx {
+    version = "21"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.media' ] 
+}
+
+// run {
+//     jvmArgs = [
+//         '--module-path', 
+//         System.getProperty('java.home') + '/../javafx-sdk-21/lib', 
+//         '--add-modules', 
+//         'javafx.controls,javafx.fxml'
+//     ]
+// }
+
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // implementation 'org.openjfx:javafx-controls:17.0.1'
+    // implementation 'org.openjfx:javafx-fxml:17.0.1'
+    implementation 'org.openjfx:javafx-controls:21'
+    implementation 'org.openjfx:javafx-fxml:21'
+    implementation 'org.openjfx:javafx-media:21'
+}
+
+application {
+    mainClassName = 'com.example.Main'
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ['src/main/resources']
+            includes = ['**/*.png', '**/*.mp3', '**/*.css', '**/*.fxml']
+        }
+    }
+}
