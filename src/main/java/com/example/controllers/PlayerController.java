@@ -21,10 +21,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 public class PlayerController {
     @FXML private Label songLabel;
@@ -136,9 +132,9 @@ private void reloadUI() {
                 .collect(Collectors.toList());
         }
         playlistListView.getItems().setAll(filteredSongs);
-        if (!filteredSongs.isEmpty()) {
-            playSong(0);
-        } else {
+        // Do not auto-play
+        // Optionally, clear selection or update UI as needed
+        if (filteredSongs.isEmpty()) {
             clearNowPlaying();
         }
     }
@@ -149,23 +145,17 @@ private void reloadUI() {
                 .filter(Song::isLiked)
                 .collect(Collectors.toList());
         playlistListView.getItems().setAll(filteredSongs);
-        if (!filteredSongs.isEmpty()) {
-            playSong(0);
-        } else {
-            clearNowPlaying();
-        }
+        // Do not auto-play
+        // Optionally, clear selection or update UI as needed
     }
 
     @FXML
-private void showAllSongs() {
-    filteredSongs = new ArrayList<>(allSongs);
-    playlistListView.getItems().setAll(filteredSongs);
-    if (!filteredSongs.isEmpty()) {
-        playSong(0);
-    } else {
-        clearNowPlaying();
+    private void showAllSongs() {
+        filteredSongs = new ArrayList<>(allSongs);
+        playlistListView.getItems().setAll(filteredSongs);
+        // Do not auto-play
+        // Optionally, clear selection or update UI as needed
     }
-}
 
     private void playSong(int index) {
         if (filteredSongs.isEmpty()) return;
