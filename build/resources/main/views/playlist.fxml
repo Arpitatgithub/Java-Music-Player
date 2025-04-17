@@ -1,20 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.controllers.PlaylistController">
-    <Label text="Playlist"/>
-    <!-- Search bar -->
-    <HBox spacing="10">
-        <TextField fx:id="searchField" promptText="Search songs..."/>
-        <Button text="Search" onAction="#searchSongs"/>
-        <Button text="Show Liked" onAction="#showLikedSongs"/>
-    </HBox>
-    <ListView fx:id="playlistView" prefHeight="200" prefWidth="300"/>
-    <HBox spacing="10">
-        <TextField fx:id="songTitleField" promptText="Song Title"/>
-        <Button text="Add Song" onAction="#addSong"/>
-        <Button text="Remove Song" onAction="#removeSong"/>
-    </HBox>
-    <Button text="Go to Player" onAction="#goToPlayer"/>
-</VBox>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.controllers.PlaylistController"
+           styleClass="playlist-view">
+           
+    <!-- Header -->
+    <top>
+        <VBox spacing="16" styleClass="playlist-header">
+            <padding><Insets top="32" right="32" bottom="24" left="32"/></padding>
+            
+            <Text text="Playlists" styleClass="header-title"/>
+            
+            <!-- Search Section -->
+            <HBox spacing="12" styleClass="search-container">
+                <TextField fx:id="searchField" promptText="Search in playlist..." 
+                          styleClass="search-field" HBox.hgrow="ALWAYS"/>
+                <Button text="Search" onAction="#searchSongs" styleClass="action-button"/>
+                <Button text="Liked Songs" onAction="#showLikedSongs" styleClass="action-button"/>
+            </HBox>
+        </VBox>
+    </top>
+    
+    <!-- Main Content -->
+    <center>
+        <VBox spacing="20" styleClass="content-area">
+            <padding><Insets top="0" right="32" bottom="32" left="32"/></padding>
+            
+            <!-- Playlist -->
+            <ListView fx:id="playlistView" VBox.vgrow="ALWAYS" styleClass="playlist-list"/>
+            
+            <!-- Add/Remove Songs -->
+            <HBox spacing="12" styleClass="controls-container">
+                <TextField fx:id="songTitleField" promptText="Enter song title" 
+                          styleClass="input-field" HBox.hgrow="ALWAYS"/>
+                <Button text="Add" onAction="#addSong" styleClass="primary-button"/>
+                <Button text="Remove" onAction="#removeSong" styleClass="secondary-button"/>
+                <Button text="Back to Player" onAction="#goToPlayer" styleClass="nav-button"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

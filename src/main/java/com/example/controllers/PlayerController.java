@@ -45,7 +45,9 @@ private void reloadUI() {
     try {
         Stage stage = (Stage) songLabel.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("/views/player.fxml"));
-        stage.setScene(new Scene(root, stage.getScene().getWidth(), stage.getScene().getHeight()));
+        Scene scene = new Scene(root, stage.getScene().getWidth(), stage.getScene().getHeight());
+        scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+        stage.setScene(scene);
     } catch (Exception e) {
         System.out.println("Failed to reload FXML: " + e.getMessage());
     }

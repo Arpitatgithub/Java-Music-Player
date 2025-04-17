@@ -1,5 +1,8 @@
 package com.example.controllers;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.example.models.Playlist;
 import com.example.models.Song;
 
@@ -10,8 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class PlaylistController {
 
@@ -39,10 +40,14 @@ public class PlaylistController {
     private void goToPlayer() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/views/player.fxml"));
+            Scene scene = new Scene(root, 800, 600);
+            // Ensure Signika font and all styles are applied
+            scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
             Stage stage = (Stage) playlistView.getScene().getWindow();
-            stage.setScene(new Scene(root, 800, 600));
+            stage.setScene(scene);
         } catch (Exception e) {
             // Handle error
+            e.printStackTrace();
         }
     }
 

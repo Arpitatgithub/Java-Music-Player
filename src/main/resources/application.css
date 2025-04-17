@@ -1,8 +1,16 @@
-.root {
-    -fx-background-color: #121212;
-    -fx-font-family: 'Segoe UI', system-ui, sans-serif;
+@font-face {
+    font-family: 'Signika';
+    src: url('fonts/Signika-Regular.ttf');
 }
 
+.root {
+    -fx-font-family: 'Signika';
+    -fx-background-color: #121212;
+    
+}
+.label, .button, .text-field, .list-view, .slider {
+    -fx-font-family: 'Signika';
+}
 .sidebar {
     -fx-background-color: #000000;
     -fx-min-width: 230px;
@@ -82,5 +90,71 @@
 
 .time-label {
     -fx-text-fill: #b3b3b3;
+    -fx-font-size: 12px;
+}
+
+/* Login Screen Styles */
+.login-background {
+    -fx-background-color: linear-gradient(to bottom right, #1a1a1a, #2d2d2d);
+}
+
+.login-card {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-background-radius: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-radius: 16px;
+    -fx-border-width: 1px;
+}
+
+.welcome-text {
+    -fx-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.subtitle-text {
+    -fx-fill: #b3b3b3;
+    -fx-font-size: 14px;
+}
+
+.login-field {
+    -fx-background-color: rgba(255, 255, 255, 0.05);
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #808080;
+    -fx-highlight-fill: #ff2d55;
+    -fx-highlight-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-padding: 12px 16px;
+    -fx-font-size: 14px;
+}
+
+.login-field:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-border-color: #ff2d55;
+    -fx-border-radius: 8px;
+    -fx-border-width: 1px;
+}
+
+.login-button {
+    -fx-background-color: #ff2d55;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12px 24px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #ff1f4b;
+}
+
+.login-button:pressed {
+    -fx-background-color: #cc2344;
+}
+
+.error-label {
+    -fx-text-fill: #ff2d55;
     -fx-font-size: 12px;
 }

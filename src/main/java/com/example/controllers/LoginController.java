@@ -22,8 +22,10 @@ public class LoginController {
         if ("user".equals(username) && "pass".equals(password)) {
             try {
                 Parent root = FXMLLoader.load(getClass().getResource("/views/player.fxml"));
+                Scene scene = new Scene(root, 800, 600);
+                scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
                 Stage stage = (Stage) usernameField.getScene().getWindow();
-                stage.setScene(new Scene(root, 800, 600));
+                stage.setScene(scene);
             } catch (Exception e) {
                 errorLabel.setText("Failed to load player.");
             }

@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.controllers.LoginController">
-    <Label text="Login"/>
-    <TextField fx:id="usernameField" promptText="Username"/>
-    <PasswordField fx:id="passwordField" promptText="Password"/>
-    <Button text="Login" onAction="#handleLogin"/>
-    <Label fx:id="errorLabel" textFill="red"/>
-</VBox>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.example.controllers.LoginController"
+           styleClass="login-background">
+    
+    <VBox alignment="CENTER" spacing="20" maxWidth="400" styleClass="login-card">
+        <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+        
+        <!-- App Logo -->
+        <ImageView fitHeight="64" fitWidth="64" styleClass="app-logo">
+            <Image url="@../images/logo.png"/>
+        </ImageView>
+        
+        <!-- Welcome Text -->
+        <Text styleClass="welcome-text" text="Welcome back"/>
+        <Text styleClass="subtitle-text" text="Login to your account"/>
+        
+        <!-- Login Form -->
+        <VBox spacing="8" styleClass="form-container">
+            <TextField fx:id="usernameField" promptText="Username" 
+                      styleClass="login-field"/>
+            <PasswordField fx:id="passwordField" promptText="Password" 
+                          styleClass="login-field"/>
+        </VBox>
+        
+        <!-- Login Button -->
+        <Button text="Sign In" onAction="#handleLogin" 
+                styleClass="login-button"/>
+        
+        <!-- Error Message -->
+        <Label fx:id="errorLabel" styleClass="error-label"/>
+    </VBox>
+</StackPane>
