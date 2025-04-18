@@ -27,7 +27,8 @@ public class LoginController {
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(scene);
             } catch (Exception e) {
-                errorLabel.setText("Failed to load player.");
+                e.printStackTrace(); // Add this line
+                errorLabel.setText("Failed to load player: " + e.getMessage());
             }
         } else {
             errorLabel.setText("Invalid credentials!");

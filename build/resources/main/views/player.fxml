@@ -10,70 +10,97 @@
             fx:controller="com.example.controllers.PlayerController"
             styleClass="root">
     
-    <!-- Left Sidebar -->
+    <!-- Section 1: Playlists -->
     <left>
-        <VBox spacing="10" styleClass="sidebar">
-            <padding><Insets top="20" right="10" bottom="20" left="10"/></padding>
-            
-            <!-- Navigation -->
-            <Button text="Home" styleClass="nav-button" onAction="#showAllSongs"/>
-            <Button text="Search" styleClass="nav-button"/>
-            <Button text="Your Library" styleClass="nav-button"/>
-            
-            <!-- Playlists -->
-            <VBox spacing="5" styleClass="playlist-section">
-                <Label text="PLAYLISTS" styleClass="section-header"/>
-                <Button text="Liked Songs" styleClass="playlist-button" onAction="#showLikedSongs"/>
-                <ListView fx:id="playlistListView" VBox.vgrow="ALWAYS"/>
+        <VBox styleClass="section-one">
+            <VBox spacing="8" styleClass="playlist-section">
+                <padding><Insets top="24" right="16" bottom="24" left="16"/></padding>
+                
+                <Text text="HOME" styleClass="section-header"/>
+                <Button text="Recently Played" styleClass="nav-button" onAction="#showAllSongs"/>
+                <Button text="Back to 2023" styleClass="nav-button"/>
+                
+                <VBox spacing="4" styleClass="queue-section" VBox.vgrow="ALWAYS">
+                    <Text text="IN THE QUEUE" styleClass="section-header"/>
+                    <ListView fx:id="playlistListView" VBox.vgrow="ALWAYS" styleClass="queue-list"/>
+                </VBox>
+                
+                <VBox spacing="4">
+                    <Text text="YOUR LIBRARY" styleClass="section-header"/>
+                    <Button text="Liked Songs" styleClass="nav-button" onAction="#showLikedSongs"/>
+                    <Button text="Karan Aujla" styleClass="nav-button"/>
+                </VBox>
             </VBox>
         </VBox>
     </left>
     
-    <!-- Main Content -->
+    <!-- Section 2: Current Song Poster -->
     <center>
-        <VBox spacing="20" styleClass="main-content">
-            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
-            
-            <!-- Search Bar -->
-            <HBox spacing="10" alignment="CENTER">
-                <TextField fx:id="searchField" promptText="What do you want to play?" 
-                          styleClass="search-field" HBox.hgrow="ALWAYS" onAction="#search"/>
-                <Button text="Search" onAction="#search"/>
-            </HBox>
-            
-            <!-- Now Playing -->
-            <VBox alignment="CENTER" spacing="10">
-                <ImageView fx:id="albumArt" fitWidth="300" fitHeight="300"/>
-                <Label fx:id="songLabel" styleClass="song-title"/>
-                <Label fx:id="artistLabel" styleClass="artist-name"/>
-                <Button fx:id="likeButton" text="♡" onAction="#toggleLike" styleClass="like-btn"/>
+        <VBox styleClass="section-two">
+            <VBox alignment="CENTER" styleClass="album-container">
+                <ImageView fx:id="albumArt" fitWidth="500" fitHeight="500" 
+                          styleClass="album-art-large"/>
             </VBox>
         </VBox>
     </center>
     
-    <!-- Player Controls (Bottom) -->
+    <!-- Section 3: Song Info and Lyrics -->
+    <right>
+        <VBox styleClass="section-three">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+            
+            <VBox styleClass="song-details">
+                <Label fx:id="songLabel" styleClass="song-title-large"/>
+                <Label fx:id="artistLabel" styleClass="artist-name-large"/>
+            </VBox>
+            
+            <ScrollPane styleClass="lyrics-container" VBox.vgrow="ALWAYS">
+                <VBox spacing="16">
+                    <padding><Insets top="24" right="16" bottom="24" left="16"/></padding>
+                    <Text fx:id="lyricsText" styleClass="lyrics-text"/>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </right>
+
+    <!-- Player Controls - Bottom Section remains unchanged -->
+    <!-- Player Controls -->
     <bottom>
-        <VBox styleClass="player-controls">
-            <HBox alignment="CENTER" spacing="20">
-            <Button text="Reload UI" onAction="#reloadUI"/>
-                <Button text="⏮" styleClass="control-button" onAction="#previousTrack"/>
-                <Button text="▶" styleClass="play-button" onAction="#play"/>
-                <Button text="⏸" onAction="#pause"/>
-                <Button text="⏭" styleClass="control-button" onAction="#nextTrack"/>
+    <VBox styleClass="player-controls">
+        <!-- Track Progress -->
+        <HBox alignment="CENTER" styleClass="progress-container">
+            <HBox alignment="CENTER" spacing="16" styleClass="controls-container">
+                <Button text="&#xe045;" styleClass="material-icon" onAction="#previousTrack"/>
+                <ToggleButton fx:id="playPauseButton" styleClass="play-pause-button" 
+                          selected="false" onAction="#togglePlayPause">
+                    <graphic>
+                        <StackPane>
+                            <Label text="&#xe037;" styleClass="material-icon" 
+                                   visible="${!playPauseButton.selected}"/>
+                            <Label text="&#xe034;" styleClass="material-icon" 
+                                   visible="${playPauseButton.selected}"/>
+                        </StackPane>
+                    </graphic>
+                </ToggleButton>
+                <Button text="&#xe044;" styleClass="material-icon" onAction="#nextTrack"/>
             </HBox>
             
-            <!-- Progress Bar -->
-            <HBox alignment="CENTER" spacing="10">
+            <!-- Slider Container -->
+            <HBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="8">
                 <Label fx:id="currentTimeLabel" styleClass="time-label"/>
-                <Slider fx:id="musicSlider" styleClass="progress-bar" HBox.hgrow="ALWAYS"/>
+                <Slider fx:id="musicSlider" styleClass="modern-slider" HBox.hgrow="ALWAYS"/>
                 <Label fx:id="totalTimeLabel" styleClass="time-label"/>
             </HBox>
             
-            <!-- Volume -->
-            <HBox alignment="CENTER_RIGHT" spacing="10">
-                <Label text="🔊" styleClass="volume-icon"/>
-                <Slider fx:id="volumeSlider" prefWidth="100" styleClass="volume-slider"/>
+            <!-- Cast and Volume -->
+            <HBox alignment="CENTER_RIGHT" spacing="16">
+                <Button text="&#xe307;" styleClass="material-icon"/>
+                <HBox alignment="CENTER" spacing="8" styleClass="volume-container">
+                    <Label text="&#xe050;" styleClass="material-icon"/>
+                    <Slider fx:id="volumeSlider" prefWidth="100" styleClass="modern-slider"/>
+                </HBox>
             </HBox>
-        </VBox>
-    </bottom>
+        </HBox>
+    </VBox>
+</bottom>
 </BorderPane>

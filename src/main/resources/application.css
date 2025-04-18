@@ -1,160 +1,285 @@
-@font-face {
-    font-family: 'Signika';
-    src: url('fonts/Signika-Regular.ttf');
+.root {
+    -fx-background-color: #243B2E;
+    -fx-font-family: -apple-system, system-ui, "SF Pro Display";
 }
 
-.root {
-    -fx-font-family: 'Signika';
-    -fx-background-color: #121212;
-    
+@font-face {
+    font-family: 'Material Icons';
+    src: url('/fonts/MaterialIcons-Regular.ttf');
 }
-.label, .button, .text-field, .list-view, .slider {
-    -fx-font-family: 'Signika';
+
+.material-icon {
+    -fx-font-family: 'Material Icons';
+    -fx-font-size: 20px;
+    -fx-text-fill: #b3b3b3;
+    -fx-background-color: transparent;
 }
+.material-icon:hover {
+    -fx-text-fill: white;
+}
+
 .sidebar {
-    -fx-background-color: #000000;
-    -fx-min-width: 230px;
+    -fx-background-color: #1A2922;
+    -fx-min-width: 260px;
+}
+
+.section-header {
+    -fx-fill: #808080;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 16px 0 8px 0;
 }
 
 .nav-button {
     -fx-background-color: transparent;
-    -fx-text-fill: #b3b3b3;
+    -fx-text-fill: #E0E0E0;
     -fx-alignment: CENTER_LEFT;
     -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 8px;
 }
 
 .nav-button:hover {
-    -fx-text-fill: #ffffff;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
 }
 
-.section-header {
-    -fx-text-fill: #b3b3b3;
-    -fx-font-size: 12px;
-    -fx-font-weight: bold;
-}
-
-.playlist-button {
+.queue-list {
     -fx-background-color: transparent;
-    -fx-text-fill: #b3b3b3;
-    -fx-alignment: CENTER_LEFT;
+    -fx-background-insets: 0;
 }
 
-.search-field {
-    -fx-background-color: #242424;
-    -fx-text-fill: white;
-    -fx-prompt-text-fill: #b3b3b3;
-    -fx-background-radius: 20;
-    -fx-padding: 8;
+.queue-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #E0E0E0;
+    -fx-padding: 8px;
+}
+
+.queue-list .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-content {
+    -fx-background-color: transparent;
+    -fx-padding: 32px;
+}
+
+.now-playing-container {
+    -fx-spacing: 24px;
+    -fx-padding: 20px;
+}
+
+.album-art {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0, 0, 10);
+    -fx-background-radius: 8px;
 }
 
 .song-title {
     -fx-text-fill: white;
     -fx-font-size: 24px;
     -fx-font-weight: bold;
+    -fx-padding: 8px 0 4px 0;
 }
 
 .artist-name {
-    -fx-text-fill: #b3b3b3;
+    -fx-text-fill: #B0B0B0;
     -fx-font-size: 16px;
+    -fx-padding: 0 0 16px 0;
+}
+
+.lyrics-label {
+    -fx-text-fill: #E0E0E0;
+    -fx-font-size: 16px;
+    -fx-padding: 8px 24px;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 20px;
+}
+
+/* Player Controls */
+.player-controls-wrapper {
+    -fx-background-color: transparent;
+    -fx-padding: 0 32px 32px 32px;
 }
 
 .player-controls {
-    -fx-background-color: #181818;
-    -fx-padding: 16;
-    -fx-spacing: 10;
+    -fx-background-color: #282828;
+    -fx-padding: 16px;
 }
 
-.control-button, .play-button {
-    -fx-background-color: transparent;
+.progress-container {
+    -fx-padding: 0 16px;
+    -fx-spacing: 32px;
+}
+
+.progress-bar .track {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar .thumb {
+    -fx-background-color: white;
+}
+
+/* Time Label Styles */
+.time-label {
     -fx-text-fill: #b3b3b3;
+    -fx-font-size: 11px;
+    -fx-min-width: 40px;
+    -fx-padding: 0 8px;
+}
+
+.controls-container {
+    -fx-alignment: center;
+}
+
+.control-button, .play-button, .pause-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-background-radius: 20px;
+}
+
+.play-button, .pause-button {
+    -fx-background-color: white;
+    -fx-text-fill: #243B2E;
+}
+
+.play-pause-button {
+    -fx-background-color: white;
+    -fx-background-radius: 50%;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-max-width: 32px;
+    -fx-max-height: 32px;
+    -fx-content-display: graphic-only;
+}
+
+.play-pause-button .material-icon {
+    -fx-text-fill: black;
     -fx-font-size: 20px;
 }
 
-.play-button {
-    -fx-background-color: #1db954;
-    -fx-background-radius: 20;
+.play-pause-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.play-pause-button:selected {
+    -fx-background-color: transparent;
+}
+
+.like-btn {
+    -fx-background-color: transparent;
     -fx-text-fill: white;
+    -fx-font-size: 18px;
 }
 
-.progress-bar, .volume-slider {
-    -fx-background-color: #535353;
+/* Volume Slider */
+.volume-slider {
+    -fx-background-color: transparent;
 }
 
-.progress-bar .track, .volume-slider .track {
-    -fx-background-color: #535353;
+.volume-slider .track {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 2px;
+    -fx-pref-height: 4px;
 }
 
-.progress-bar .thumb, .volume-slider .thumb {
-    -fx-background-color: #1db954;
+.volume-slider .thumb {
+    -fx-background-color: white;
+    -fx-pref-width: 12px;
+    -fx-pref-height: 12px;
+    -fx-background-radius: 6px;
+    visibility: hidden;
 }
 
-.time-label {
-    -fx-text-fill: #b3b3b3;
-    -fx-font-size: 12px;
+.volume-slider:hover .thumb {
+    visibility: visible;
 }
 
-/* Login Screen Styles */
-.login-background {
-    -fx-background-color: linear-gradient(to bottom right, #1a1a1a, #2d2d2d);
+.volume-container {
+    -fx-spacing: 8px;
+    -fx-alignment: center;
 }
 
-.login-card {
-    -fx-background-color: rgba(255, 255, 255, 0.05);
-    -fx-background-radius: 16px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-border-radius: 16px;
-    -fx-border-width: 1px;
+.volume-container .modern-slider {
+    -fx-pref-width: 93px;
 }
 
-.welcome-text {
-    -fx-fill: white;
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
+/* Modern Slider Styles */
+.modern-slider {
+    -fx-background-color: transparent;
 }
 
-.subtitle-text {
-    -fx-fill: #b3b3b3;
-    -fx-font-size: 14px;
+.modern-slider .track {
+    -fx-background-color: #5e5e5e;
+    -fx-background-radius: 2px;
+    -fx-pref-height: 4px;
 }
 
-.login-field {
-    -fx-background-color: rgba(255, 255, 255, 0.05);
-    -fx-text-fill: white;
-    -fx-prompt-text-fill: #808080;
-    -fx-highlight-fill: #ff2d55;
-    -fx-highlight-text-fill: white;
+.modern-slider .thumb {
+    -fx-background-color: white;
+    -fx-pref-width: 12px;
+    -fx-pref-height: 12px;
+    -fx-background-radius: 6px;
+    -fx-background-insets: 0;
+    visibility: hidden;
+}
+
+.modern-slider:hover .thumb {
+    visibility: visible;
+}
+
+/* Section Styles */
+.section-one {
+    -fx-background-color: #1A2922;
+    -fx-min-width: 300px;
+    -fx-max-width: 300px;
+}
+
+.section-two {
+    -fx-background-color: #243B2E;
+    -fx-alignment: center;
+    -fx-padding: 40px;
+}
+
+.section-three {
+    -fx-background-color: #1A2922;
+    -fx-min-width: 300px;
+    -fx-max-width: 300px;
+}
+
+/* Album Art Styles */
+.album-art-large {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0, 0, 10);
     -fx-background-radius: 8px;
-    -fx-padding: 12px 16px;
-    -fx-font-size: 14px;
 }
 
-.login-field:focused {
-    -fx-background-color: rgba(255, 255, 255, 0.08);
-    -fx-border-color: #ff2d55;
-    -fx-border-radius: 8px;
-    -fx-border-width: 1px;
-}
-
-.login-button {
-    -fx-background-color: #ff2d55;
+/* Song Info Styles */
+.song-title-large {
     -fx-text-fill: white;
-    -fx-font-size: 14px;
+    -fx-font-size: 32px;
     -fx-font-weight: bold;
-    -fx-padding: 12px 24px;
-    -fx-background-radius: 8px;
-    -fx-cursor: hand;
+    -fx-wrap-text: true;
 }
 
-.login-button:hover {
-    -fx-background-color: #ff1f4b;
+.artist-name-large {
+    -fx-text-fill: #B0B0B0;
+    -fx-font-size: 20px;
+    -fx-padding: 8px 0 24px 0;
 }
 
-.login-button:pressed {
-    -fx-background-color: #cc2344;
+/* Lyrics Styles */
+.lyrics-container {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
 }
 
-.error-label {
-    -fx-text-fill: #ff2d55;
-    -fx-font-size: 12px;
+.lyrics-container .viewport {
+    -fx-background-color: transparent;
+}
+
+.lyrics-text {
+    -fx-fill: #E0E0E0;
+    -fx-font-size: 16px;
+    -fx-line-spacing: 8px;
 }
