@@ -64,41 +64,36 @@
     </right>
 
     <!-- Player Controls - Bottom Section remains unchanged -->
-    <!-- Player Controls -->
-    <bottom>
+    <!-- Replace the existing player controls section -->
+<bottom>
     <VBox styleClass="player-controls">
-        <!-- Track Progress -->
         <HBox alignment="CENTER" styleClass="progress-container">
-            <HBox alignment="CENTER" spacing="16" styleClass="controls-container">
-                <Button text="&#xe045;" styleClass="material-icon" onAction="#previousTrack"/>
-                <ToggleButton fx:id="playPauseButton" styleClass="play-pause-button" 
-                          selected="false" onAction="#togglePlayPause">
-                    <graphic>
-                        <StackPane>
-                            <Label text="&#xe037;" styleClass="material-icon" 
-                                   visible="${!playPauseButton.selected}"/>
-                            <Label text="&#xe034;" styleClass="material-icon" 
-                                   visible="${playPauseButton.selected}"/>
-                        </StackPane>
-                    </graphic>
-                </ToggleButton>
-                <Button text="&#xe044;" styleClass="material-icon" onAction="#nextTrack"/>
-            </HBox>
-            
-            <!-- Slider Container -->
+            <!-- Time and Progress Slider -->
             <HBox HBox.hgrow="ALWAYS" alignment="CENTER" spacing="8">
-                <Label fx:id="currentTimeLabel" styleClass="time-label"/>
+                <Label fx:id="currentTimeLabel" styleClass="time-label" text="0:00"/>
                 <Slider fx:id="musicSlider" styleClass="modern-slider" HBox.hgrow="ALWAYS"/>
-                <Label fx:id="totalTimeLabel" styleClass="time-label"/>
+                <Label fx:id="totalTimeLabel" styleClass="time-label" text="0:00"/>
             </HBox>
+        </HBox>
+        
+        <!-- Playback Controls -->
+        <HBox alignment="CENTER" spacing="32">
+            <Button text="&#xe045;" styleClass="material-icon" onAction="#previousTrack"/>
+            <ToggleButton fx:id="playPauseButton" styleClass="play-pause-button" 
+                         selected="false" onAction="#togglePlayPause">
+                <graphic>
+                    <StackPane>
+                        <Label text="&#xe037;" styleClass="material-icon, play-icon"/>
+                        <Label text="&#xe034;" styleClass="material-icon, pause-icon"/>
+                    </StackPane>
+                </graphic>
+            </ToggleButton>
+            <Button text="&#xe044;" styleClass="material-icon" onAction="#nextTrack"/>
             
-            <!-- Cast and Volume -->
-            <HBox alignment="CENTER_RIGHT" spacing="16">
-                <Button text="&#xe307;" styleClass="material-icon"/>
-                <HBox alignment="CENTER" spacing="8" styleClass="volume-container">
-                    <Label text="&#xe050;" styleClass="material-icon"/>
-                    <Slider fx:id="volumeSlider" prefWidth="100" styleClass="modern-slider"/>
-                </HBox>
+            <!-- Volume Control -->
+            <HBox alignment="CENTER" spacing="8" styleClass="volume-container">
+                <Label text="&#xe050;" styleClass="material-icon"/>
+                <Slider fx:id="volumeSlider" prefWidth="100" styleClass="modern-slider"/>
             </HBox>
         </HBox>
     </VBox>

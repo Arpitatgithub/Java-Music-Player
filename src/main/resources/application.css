@@ -106,8 +106,8 @@
 }
 
 .progress-container {
-    -fx-padding: 0 16px;
-    -fx-spacing: 32px;
+    -fx-padding: 16px;
+    -fx-spacing: 8px;
 }
 
 .progress-bar .track {
@@ -147,24 +147,35 @@
 .play-pause-button {
     -fx-background-color: white;
     -fx-background-radius: 50%;
-    -fx-min-width: 32px;
-    -fx-min-height: 32px;
-    -fx-max-width: 32px;
-    -fx-max-height: 32px;
-    -fx-content-display: graphic-only;
-}
-
-.play-pause-button .material-icon {
-    -fx-text-fill: black;
-    -fx-font-size: 20px;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-padding: 8px;
 }
 
 .play-pause-button:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
 }
 
-.play-pause-button:selected {
-    -fx-background-color: transparent;
+.play-pause-button .material-icon {
+    -fx-font-size: 24px;
+    -fx-text-fill: black;
+}
+
+.play-icon {
+    -fx-opacity: 1;
+}
+
+.pause-icon {
+    -fx-opacity: 0;
+}
+
+.play-pause-button:selected .play-icon {
+    -fx-opacity: 0;
+}
+
+.play-pause-button:selected .pause-icon {
+    -fx-opacity: 1;
 }
 
 .like-btn {
@@ -198,11 +209,12 @@
 
 .volume-container {
     -fx-spacing: 8px;
+    -fx-padding: 0 16px;
     -fx-alignment: center;
 }
 
 .volume-container .modern-slider {
-    -fx-pref-width: 93px;
+    -fx-pref-width: 100px;
 }
 
 /* Modern Slider Styles */
@@ -222,11 +234,6 @@
     -fx-pref-height: 12px;
     -fx-background-radius: 6px;
     -fx-background-insets: 0;
-    visibility: hidden;
-}
-
-.modern-slider:hover .thumb {
-    visibility: visible;
 }
 
 /* Section Styles */

@@ -37,13 +37,13 @@ public class PlayerController {
     @FXML private ListView<Song> playlistListView;
     @FXML private Button likeButton;
     @FXML private ToggleButton playPauseButton;
+    @FXML private Text lyricsText;
 
     // State Management
     private List<Song> allSongs = new ArrayList<>();
     private List<Song> filteredSongs = new ArrayList<>();
     private int currentSongIndex = 0;
     private MediaPlayer mediaPlayer;
-    private boolean isSeeking = false;
 
     @FXML
     public void initialize() {
@@ -92,20 +92,22 @@ public class PlayerController {
     }
 
     private void setupMusicSliderListeners() {
+        // Show preview time while dragging
+        musicSlider.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (musicSlider.isValueChanging() && mediaPlayer != null) {
+                double time = newVal.doubleValue();
+                currentTimeLabel.setText(formatTime(Duration.seconds(time)));
+            }
+        });
+    
+        // Seek when user releases the slider
         musicSlider.valueChangingProperty().addListener((obs, wasChanging, isChanging) -> {
-            isSeeking = isChanging;
             if (!isChanging && mediaPlayer != null) {
                 mediaPlayer.seek(Duration.seconds(musicSlider.getValue()));
             }
         });
-
-        musicSlider.setOnMouseReleased(e -> {
-            if (mediaPlayer != null) {
-                mediaPlayer.seek(Duration.seconds(musicSlider.getValue()));
-            }
-        });
     }
-    @FXML private Text lyricsText;
+    
 
     private void setupInitialState() {
         setAlbumArt(null);
@@ -118,7 +120,7 @@ public class PlayerController {
     private void playSong(int index) {
         if (index < 0 || index >= filteredSongs.size()) return;
 
-        Song song = filteredSongs.get(index); // <-- This line fixes the errors
+        Song song = filteredSongs.get(index);
 
         try {
             if (mediaPlayer != null) {
@@ -153,24 +155,30 @@ public class PlayerController {
 
     private void setupMediaPlayer() {
         if (mediaPlayer == null) return;
-
+    
+        // Remove all previous listeners to avoid duplicate updates
+        musicSlider.valueProperty().unbind();
+    
+        // Update slider in real-time as music plays
         mediaPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
-            if (!isSeeking) {
+            if (!musicSlider.isValueChanging()) {
                 musicSlider.setValue(newTime.toSeconds());
                 currentTimeLabel.setText(formatTime(newTime));
             }
         });
-
+    
+        // Set up duration once media is loaded
         mediaPlayer.setOnReady(() -> {
             Duration total = mediaPlayer.getMedia().getDuration();
+            musicSlider.setMin(0);
             musicSlider.setMax(total.toSeconds());
             totalTimeLabel.setText(formatTime(total));
         });
-
-        mediaPlayer.setOnEndOfMedia(() -> {
-            nextTrack();
-        });
-
+    
+        // Handle end of media
+        mediaPlayer.setOnEndOfMedia(() -> nextTrack());
+    
+        // Set initial volume
         mediaPlayer.setVolume(volumeSlider.getValue() / 100.0);
     }
 
@@ -180,9 +188,9 @@ public class PlayerController {
     private void togglePlayPause() {
         if (mediaPlayer != null) {
             if (playPauseButton.isSelected()) {
-                mediaPlayer.pause();
-            } else {
                 mediaPlayer.play();
+            } else {
+                mediaPlayer.pause();
             }
         }
     }
