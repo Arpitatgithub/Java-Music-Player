@@ -153,27 +153,34 @@ public class PlayerController {
         }
     }
 
+    private javafx.beans.value.ChangeListener<Duration> timeListener;
+
     private void setupMediaPlayer() {
         if (mediaPlayer == null) return;
     
-        // Remove all previous listeners to avoid duplicate updates
-        musicSlider.valueProperty().unbind();
+        // Remove previous listener if any
+        if (timeListener != null) {
+            mediaPlayer.currentTimeProperty().removeListener(timeListener);
+        }
     
-        // Update slider in real-time as music plays
-        mediaPlayer.currentTimeProperty().addListener((obs, oldTime, newTime) -> {
-            if (!musicSlider.isValueChanging()) {
-                musicSlider.setValue(newTime.toSeconds());
-                currentTimeLabel.setText(formatTime(newTime));
-            }
-        });
-    
-        // Set up duration once media is loaded
+        // Set up duration and slider after media is loaded
         mediaPlayer.setOnReady(() -> {
             Duration total = mediaPlayer.getMedia().getDuration();
             musicSlider.setMin(0);
             musicSlider.setMax(total.toSeconds());
             totalTimeLabel.setText(formatTime(total));
+            currentTimeLabel.setText("0:00");
+            musicSlider.setValue(0);
         });
+    
+        // Real-time slider sync
+        timeListener = (obs, oldTime, newTime) -> {
+            if (!musicSlider.isValueChanging()) {
+                musicSlider.setValue(newTime.toSeconds());
+                currentTimeLabel.setText(formatTime(newTime));
+            }
+        };
+        mediaPlayer.currentTimeProperty().addListener(timeListener);
     
         // Handle end of media
         mediaPlayer.setOnEndOfMedia(() -> nextTrack());
@@ -276,6 +283,9 @@ public class PlayerController {
     }
 
     private String formatTime(Duration duration) {
+        if (duration == null || duration.isUnknown() || duration.lessThan(Duration.ZERO)) {
+            return "0:00";
+        }
         int minutes = (int) duration.toMinutes();
         int seconds = (int) duration.toSeconds() % 60;
         return String.format("%d:%02d", minutes, seconds);
